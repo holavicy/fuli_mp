@@ -1,0 +1,115 @@
+<view class="index">
+  <view class="user-info-bg"></view>
+  <view class="user-info-wrapper">
+    <view class="left">
+      <view class="name">{{userInfo.name}}</view>
+      <view>{{userInfo.staffNo}}</view>
+    </view>
+    <view class="right">
+      <view><text class="lable">出生日期：</text><text class="value">{{userInfo.birthday}}</text></view>
+      <!-- <view><text class="lable">转正日期：</text><text class="value">{{userInfo.hiredate}}</text></view> -->
+      <view><text class="lable">员工状态：</text><text class="value">{{userInfo.staffStatus == 1 ? '全职' : '试用期员工'}}</text></view>
+      <!-- <view><text class="lable">工作岗位：</text><text class="value">{{userInfo.position}}</text></view> -->
+    </view>
+  </view>
+
+  <view class="gift-info">
+    <view a:if="{{userInfo.staffStatus == 2}}" class="error-info-wrapper">
+      <image class="error-tip" mode="scaleToFill" src="../../images/public/tip.png"/>
+        <text class="text">
+          您正处于试用期，转正之后才可以享受生日礼包福利哦~
+        </text>
+    </view>
+    <view a:else>
+      <view a:if="{{thisBirthday >= userInfo.hiredate || userInfo.JOBRANKCODE <= 4}}">
+        <view a:if = "{{today >= thisBirthday ||  userInfo.JOBRANKCODE <= 4}}">
+          <view a:if="{{isZBirthday}}" class="oa-wrapper">
+            <image class="oa-tip" mode="scaleToFill" src="../../images/public/birthday.png"/>
+            <text class="text">
+              HAPPY BIRTHDAY!\n您有一份生日礼包可通过OA申请，快去领取吧
+            </text>
+          </view>
+          <view a:else>
+            <view a:if = "{{orderList.length>0}}" class="list-info">
+              <view class="top">
+                <text>{{year}}年生日礼包</text>
+                <text class="{{orderList[0].status == 3 ? 'btn' : 'status'}}" onTap="finishOrder" data-id="{{orderList[0].id}}" data-status="{{orderList[0].status}}">{{orderStatus[orderList[0].status-1]}}</text>
+              </view>
+              <navigator class="order-info" url="../../pages/order/order"  open-type="switchTab">
+                <view class="order-detail">
+                  <text class="gift-name">{{orderList[0].giftName}}</text>
+                  <view><text a:for="{{orderList[0].goods}}" class="goods-name">{{item.name}}</text></view>
+                </view>
+                <image class="arrow-right" mode="scaleToFill" src="../../images/public/arrowRight.png"/>
+              </navigator >
+            </view>
+            <navigator a:else class="oa-wrapper" url="../../pages/giftBag/giftBag"  open-type="switchTab">
+              <image class="oa-tip" mode="scaleToFill" src="../../images/public/birthday.png"/>
+              <text class="text">
+                HAPPY BIRTHDAY!\n您有一份生日礼包可申请，快去领取吧
+              </text>
+              <image class="arrow-right" mode="scaleToFill" src="../../images/public/arrowRight.png"/>
+            </navigator>
+          </view>
+        </view>
+        <view a:else class="error-info-wrapper">
+          <image class="error-tip" mode="scaleToFill" src="../../images/public/tip.png"/>
+          <text class="text">
+            小主别急，您的生日还没到哦，请于{{thisBirthday}}之后再来吧
+          </text>
+        </view>
+      </view>
+      <view a:else class="error-info-wrapper">
+        <image class="error-tip" mode="scaleToFill" src="../../images/public/tip.png"/>
+        <text class="text">
+          您今年的生日小于转正日期，无法申请生日礼包，明年即可申请啦~
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <view class="supply-wrapper" a:if="{{supplyList.length>0}}">
+    <view class="supply-title">
+    <image class="icon" mode="scaleToFill" src="../../images/public/light.png"/>
+      您可以帮以下同事代领生日礼包：
+    </view>
+    <view class="supply-list-wrapper">
+      <view class="supply-item" a:for="{{supplyList}}">
+      <text class="name">{{item.staff_name}}</text>
+      <text class="status">{{item.supply_order_list.length>0?orderStatus[item.supply_order_list[0].status - 1]:'未申请'}}</text>
+ 
+      <navigator class="acts" url="../../pages/othersOrder/othersOrder" a:if="{{item.supply_order_list.length>0}}">
+        查看详情
+        <image class="icon-arrow" mode="scaleToFill" src="../../images/public/arrowRight.png"/>
+      </navigator>
+       <navigator a:else class="acts" url="../../pages/giftBag/giftBag"  open-type="switchTab">
+        立即申请
+        <image class="icon-arrow" mode="scaleToFill" src="../../images/public/arrowRight.png"/>
+      </navigator>
+
+      </view>
+    </view>
+  </view>
+
+  <view class="suggest-wrapper" a:if="{{canSuggest}}">
+    <view class="suggest-title">
+      <view class="weight">
+        <image class="icon" mode="scaleToFill" src="../../images/public/question.png"/>
+        诚邀您参与生日礼包调查
+      </view>
+      <text class="light">为了提供更好的生日福利，诚邀您参与礼包意见收集，我们会根据您的建议，逐步优化生日礼包，谢谢您的参与！注：最多选择3个选项</text>
+    </view>
+
+    <view class="items">
+      <checkbox-group onChange="onChange" name="libs">
+        <label class="checkbox" a:for="{{suggestItems}}" key="label-{{index}}">
+          <checkbox value="{{item.id}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
+          <text class="checkbox-text">{{item.name}}</text>
+        </label>
+      </checkbox-group>
+      <input a:if="{{inputShow}}" class="input" onInput="bindKeyInput" placeholder="请输入您想要的生日礼包品类" />
+      <view class="btn-wrapper" onTap="submitSuggest">立即提交</view>
+    </view>
+
+  </view>
+</view>

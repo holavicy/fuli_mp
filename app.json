@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/giftBag/giftBag",
+    "pages/giftBagInfo/giftBagInfo",
+    "pages/othersOrder/othersOrder",
+    "pages/orderConfirm/orderConfirm",
+    "pages/orderInfo/orderInfo"
+  ],
+  "window": {
+    "defaultTitle": "福利管理系统",
+    "titleBarColor": "#d81e06"
+  },
+  "tabBar": {
+    "textColor": "#dbdbdb",
+    "selectedColor": "#d81e06",
+    "backgroundColor": "#F5F5F9",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "icon": "images/icons/home.png",
+        "activeIcon": "images/icons/homeHL.png",
+        "name": "首页"
+      },
+      {
+        "pagePath": "pages/giftBag/giftBag",
+        "icon": "images/icons/gift.png",
+        "activeIcon": "images/icons/giftHL.png",
+        "name": "礼包"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "icon": "images/icons/order.png",
+        "activeIcon": "images/icons/orderHL.png",
+        "name": "订单"
+      }
+    ]
+  }
+}

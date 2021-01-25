@@ -1,0 +1,7 @@
+<template name="empty">
+
+<view class="empty">
+<image mode="scaleToFill" src="../../images/public/empty.png"/>
+    暂无数据
+</view>
+</template>

@@ -1,0 +1,118 @@
+<view class="gift-bag {{showBottom? 'none' : 'auto'}}">
+  <view class="search-wrapper">
+    <view class="search-item">
+      <view class="label">
+        礼包名称
+      </view>
+      <input onInput="setGiftName" />
+    </view>
+    <view class="search-item">
+      <view class="label">
+        商品名称
+      </view>
+      <input onInput="setGoodsName" />
+    </view>
+    <image mode="scaleToFill" src="../../images/public/search.png" onTap="search"/>
+  </view>
+  <view class="gifts-wrapper">
+    <!-- <view class="gift-item-wrapper" a:for="{{giftsList}}">
+      <view class="top">
+        <view class="gfigt-name">{{item.name}}</view>
+        <view class="light-info">
+          {{item.limitGoodsNum > 0 ? item.goods.length + '选' + item.limitGoodsNum : '共计' + item.goods.length + '件商品'}}
+        </view>
+      </view>
+      <view class="goods-name">
+        <text a:for="{{item.goods}}" a:for-item="goods">{{goods.name}}</text>
+      </view>
+      <view class="actions">
+        <!-- <navigator class="btn" url="../../pages/giftBagInfo/giftBagInfo?id={{item.id}}">查看礼包详情</navigator> -->
+        <!-- <view class="btn" data-giftid="{{item.id}}" data-index="{{index}}" onTap="setGifts">申请此礼包</view>
+      </view>
+    </view> -->
+
+    <view class="gift-bag-item-wrapper" a:for="{{giftsList}}">
+      <view class="left">
+        <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.image_url}}"  onTap="onViewImg" data-url="{{item.image_url}}"/>
+      </view>
+      <view class="right">
+      <view>
+        {{item.name}}
+      </view>
+      <view class="actions">
+        <view class="btn" data-giftid="{{item.id}}" data-index="{{index}}" onTap="setGifts" a:if="{{selectedIndex != index}}">申请此礼包</view>
+        <view class="btn cancel" data-giftid="{{item.id}}" data-index="{{index}}" onTap="cancelSetGifts" a:else>取消申请此礼包</view>
+      </view>
+      </view>
+    </view>
+  </view>
+  <view class="order-wrapper">
+    <view class="left">
+      <view class="line-item">
+        <view class="label">申请年份：</view><view class="value">{{year}}</view>
+      </view>
+      <view class="line-item">
+        <view class="label">申请人：</view><view class="value">{{name}}({{staffNo}})</view>
+        <view class="btn-primary" onTap="chooseStaff" a:if="{{canSupply}}">代他人申请</view>
+      </view>
+      <view class="line-item">
+        <view class="label">申请礼包：</view><view class="value">{{selectedGift.name}}</view>
+      </view>
+      <view class="line-item">
+        <view class="label">商品明细：</view>
+        <view class="value " a:if="{{selectedGift.limitGoodsNum == 0}}"><text class="goods-item-name" a:for="{{selectedGift.goods}}">{{item.name}}</text></view>
+        <view class="value" a:else><text class="goods-item-name" a:for="{{selectedGoods}}">{{item.name}} </text></view>
+      </view>
+    </view>
+    <text class="right" onTap="createOrder">
+      提交申请
+    </text>
+  </view>
+</view>
+
+<view class="img-big-wrapper" a:if="{{showImg}}" onTap="hideImg">
+  <image mode="widthFix" src="{{currentImg}}"/>
+</view>
+
+<view class="bottom-sheet-wrapper" a:if="{{showBottom}}">
+  <view class="mask" onTap="hiddenBottom"></view>
+  <view class="wrapper">
+    <view class="title" a:if="{{limitGoodsNum > 0}}">
+      请选择{{limitGoodsNum}}个商品：
+    </view>
+    <view class="title" a:else>
+      共计{{oriSelectedList.length}}个商品：
+    </view>
+    <view class="items">
+      <checkbox-group onChange="onChange" a:if="{{limitGoodsNum > 0}}">
+        <label class="checkbox" a:for="{{oriSelectedList}}">
+          <view class="left">
+            <checkbox value="{{item.id}}" checked="{{item.checked || item.is_must == 1}}" disabled="{{item.num <= 0 || item.is_must == 1}}" />
+            <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}" onTap="onViewImg" data-url="{{item.imageUrl}}"/>
+            <text class="checkbox-text">{{item.name}}</text>
+          </view>
+          <view class="right">
+            <image a:if="{{item.num <= 0 && item.totalLikeNum == 0}}" class="heart" mode="scaleToFill" src="../../images/public/heart.png" data-id="{{item.id}}" data-index="{{index}}" onTap="want"/>
+            <image a:if="{{item.num <= 0 && item.totalLikeNum > 0}}" class="heart" mode="scaleToFill" src="../../images/public/cancel-like.png" data-id="{{item.id}}" data-index="{{index}}" onTap="cancelWant"/>
+          </view>
+        </label>
+      </checkbox-group>
+      <view class="goods-list-wrapper" a:else>
+        <view a:for="{{oriSelectedList}}" class="goods-item-wrapper">
+          <view class="left">
+            <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}"/>
+            <text>{{item.name}}</text>
+          </view>
+          <view class="right">
+            <image a:if="{{item.num <= 0 && item.totalLikeNum == 0}}" class="heart" mode="scaleToFill" src="../../images/public/heart.png" data-id="{{item.id}}" data-index="{{index}}" onTap="want"/>
+            <image a:if="{{item.num <= 0 && item.totalLikeNum > 0}}" class="heart" mode="scaleToFill" src="../../images/public/cancel-like.png" data-id="{{item.id}}" data-index="{{index}}" onTap="cancelWant"/>
+          </view>
+
+      </view>
+    </view>
+    <view class="bottom-actions">
+      <view class="btn cancel" onTap="hiddenBottom">取消</view>
+      <view class="btn confirm" onTap="confirmBottom">确定</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<import src="../../templates/empty/empty.axml"/>
+
+<view class="order-list-wrapper">
+  <view class="tabs">
+    <view class="tabs-item {{orderStatus===item.key?'active':''}}" a:for="{{statusList}}" a:for-item="item" onTap="setStatus" data-key="{{item.key}}">
+      {{item.text}}
+    </view>
+  </view>
+
+  <view class="order-list">
+    <view class="item" a:for="{{list}}" a:for-item="order">
+      <view class="top-info">
+        <view>{{order.year}}年生日礼包（另含一张餐券）</view>
+        <view style="color:#d81e06"> {{orderStatusDic[order.status]}}</view>
+      </view>
+
+      <view class="center-info">
+        <view>{{order.giftName}}<text class="cus-badge" a:if="{{order.creatorNo != order.staffNo && order.creatorName}}">{{'由'+order.creatorName.trim()+'代领'}}</text></view>
+        <view>
+          <text class="goods-name" a:for="{{order.goods}}" a:for-item="goods">{{goods.name}}</text>
+        </view>
+      </view>
+      
+      <view class="actions">
+        <view url="../../pages/giftBagInfo/giftBagInfo?goods={{JSON.stringify(order.goods)}}" onTap="toGiftBagInfo" class="btn" data-index="{{index}}">查看商品</view>
+        <view class="btn" a:if="{{order.status == 3}}" onTap="finishOrder" data-id="{{order.id}}">确认领取</view>
+      </view>
+    </view>
+  </view>
+
+  <template is="empty" a:if="{{totalLength == 0}}" />
+</view>

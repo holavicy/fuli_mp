@@ -1,0 +1,239 @@
+page{
+    background: #f4f4f4;
+}
+.user-info-bg{
+    height: 300rpx;
+    background: linear-gradient(145deg,#d81e06,#c87e74);
+    /* transform: skewY(8deg); */
+    transform-origin: 100%;
+}
+
+.user-info-wrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 300rpx;
+    padding: 10rpx 10rpx;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info-wrapper .right, .user-info-wrapper .left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-info-wrapper .right text, .user-info-wrapper .left text{
+    margin-bottom: 10rpx;
+}
+.user-info-wrapper .left{
+    margin-left: 40rpx;
+}
+.user-info-wrapper .left .name{
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
+}
+
+.user-info-wrapper .right .lable{
+    width: 200rpx;
+    text-align: right;
+    display: inline-block;
+}
+.user-info-wrapper .right .value{
+    width: 200rpx;
+    text-align: left;
+    display: inline-block;
+}
+
+.gift-info{
+    margin: 40rpx 20rpx 20rpx 20rpx;
+    padding: 10rpx 10rpx;
+    background: #ffffff;
+    min-height: 180rpx;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+}
+
+.oa-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 180rpx;
+}
+.error-info-wrapper{
+    display: flex;
+    align-items: center;
+    height: 180rpx;
+}
+.error-tip{
+    width: 32rpx;
+    height: 32rpx;
+    display: block;
+    margin-right: 30rpx;
+    margin-left: 20rpx;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.error-info-wrapper .text{
+     flex-grow: 1;
+}
+
+.oa-tip{
+    width: 128rpx;
+    height: 128rpx;
+    display: block;
+    margin-right: 10rpx;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.arrow-right{
+    margin-left: 20rpx;
+}
+
+.order-info{
+    border-top: 1rpx solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20rpx;
+}
+
+.list-info .top{
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20rpx;
+}
+
+.list-info .top .btn{
+    width: 140rpx;
+    height: 48rpx;
+    line-height: 48rpx;
+    text-align: center;
+    border-radius: 20rpx;
+    color: #d81e06;
+    border: 1rpx solid #d81e06;
+    box-sizing: border-box;
+}
+
+.list-info .top .status{
+    color: #d81e06;
+}
+
+.order-detail .gift-name{
+    font-size: 32rpx;
+    line-height: 64rpx;
+}
+
+.order-detail .goods-name{
+    color: #ccc;
+    margin-right: 20rpx;
+    line-height: 48rpx;
+}
+.supply-title{
+    display: flex;
+    align-items: center;
+    height: 100rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+    background: #ffffff;
+}
+.supply-title .icon{
+    display: block;
+    width: 64rpx;
+    height: 64rpx;
+    margin: 0 20rpx;
+}
+
+.supply-list-wrapper .supply-item{
+    padding: 0 20rpx;
+    height: 120rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.supply-list-wrapper .supply-item .name{
+    font-weight: bold;
+}
+
+.supply-list-wrapper .supply-item .acts{
+    display: flex;
+    align-items: center;
+}
+
+.supply-list-wrapper .supply-item .acts .icon-arrow{
+    display: block;
+    width: 32rpx;
+    height: 32rpx;
+    margin: 0 20rpx;
+}
+.suggest-wrapper{
+    margin-top: 20rpx;
+}
+
+.suggest-wrapper .items{
+    padding: 20rpx;
+    background: #ffffff;
+}
+
+.suggest-wrapper .btn-wrapper{
+    height: 86rpx;
+    line-height: 86rpx;
+    background: #d81e06;
+    color: #ffffff;
+    font-size: 36rpx;
+    text-align: center;
+    width: 272rpx;
+    margin: 0 auto;
+    border-radius: 20rpx;
+    margin-top: 20rpx;
+}
+
+.suggest-wrapper .checkbox{
+    display: flex;
+    margin-bottom: 20rpx;
+}
+.suggest-title{
+    background: #ffffff;
+}
+
+.suggest-title .weight{
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    border-bottom: 1rpx solid #E5E5E5;
+    font-weight: bold;
+}
+
+.suggest-title .light{
+    padding: 20rpx;
+    height: 80rpx;
+    color: #888;
+    display: flex;
+    align-items: center;
+}
+
+.suggest-title .weight .icon{
+    display: block;
+    width: 64rpx;
+    height: 64rpx;
+    margin: 0 20rpx;
+}
+
+.suggest-wrapper .input{
+    width: 600rpx;
+    font-size: 24rpx;
+    height: 48rpx;
+    border: 1rpx solid #E5E5E5;
+    margin-left: 60rpx;
+}

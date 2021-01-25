@@ -1,0 +1,13 @@
+page{
+    font-size: 24rpx;
+    font-family: 'Microsoft Yahei';
+    color: #222;
+}
+
+.arrow-right{
+    width: 32rpx;
+    height: 32rpx;
+    display: block;
+    flex-shrink: 0;
+    flex-grow: 0;
+}

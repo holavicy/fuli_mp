@@ -1,0 +1,22 @@
+<view>
+<view class="base-info">
+  <view class="gift-name">{{gift.giftName}}</view>
+  <view>
+    {{ '共计' + gift.goods.length + '件商品'}}
+  </view>
+</view>
+<view class="goods-info">
+  <view class="goods-item" a:for="{{gift.goods}}">
+    <!-- <image mode="scaleToFill" src="{{item.imageUrl}}"/> -->
+    <image mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}" onTap="onViewImg" data-url="{{item.imageUrl}}"/>
+    <view class="right">
+      <view class="name">{{item.name}}</view>
+    </view>
+    <!-- <image a:if="{{item.num == 0}}" class="heart" mode="scaleToFill" src="../../images/public/heart.png" data-id="{{item.id}}" onTap="want"/> -->
+  </view>
+</view>
+
+<view class="img-big-wrapper" a:if="{{showImg}}" onTap="hideImg">
+  <image mode="widthFix" src="{{currentImg}}"/>
+</view>
+</view>
