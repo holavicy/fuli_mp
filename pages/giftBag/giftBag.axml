@@ -91,7 +91,7 @@
       <view class="goods-list-wrapper" a:else>
         <view a:for="{{oriSelectedList}}" class="goods-item-wrapper">
           <view class="left">
-            <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}"/>
+            <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}" onTap="onViewImg" data-url="{{item.imageUrl}}"/>
             <text>{{item.name}}</text>
           </view>
           <view class="right">

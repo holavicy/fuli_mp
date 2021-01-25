@@ -150,6 +150,7 @@ page{
     line-height: 100rpx;
     text-align: center;
     font-size: 32rpx;
+    background: #E5E5E5;
 }
 .wrapper .bottom-actions .btn.confirm{
     background: #d81e06;
