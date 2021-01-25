@@ -9,7 +9,7 @@ Page({
     today: '',
     year: '',
     currentPage: 1,
-    pageSize: 5,
+    pageSize: 10,
     giftBagName: '',
     goodsName: '',
     giftsList: [],
