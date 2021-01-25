@@ -26,7 +26,10 @@ Page({
     supplyStaffList: [],
     currentImg: '',
     showImg: false,
-    selectedGoodsList: []
+    selectedGoodsList: [],
+    preSelectedGiftId: '',
+    thisBirthday: '',
+    userInfo: null
   },
   onLoad() {
     this.setData({
@@ -52,8 +55,25 @@ Page({
           creator: res.data.staffNo,
           creatorName: res.data.name
         })
+
         this.getSupplyList()
         this.getGifts()
+      }
+    })
+
+    dd.getStorage({
+      key: 'userInfoNC',
+      success: (res) => {
+        console.log(res)
+        
+
+        let year = today.getFullYear()
+        let thisBirthday = res.data.birthday.replace(/^[0-9]{4}/g,year)
+
+        this.setData({
+          thisBirthday: thisBirthday,
+          userInfo: res.data
+        })
       }
     })
   },
@@ -140,7 +160,8 @@ Page({
       oriSelectedList: selectedGift.goods,
       limitGoodsNum: selectedGift.limitGoodsNum,
       preSelectedGift: selectedGift,
-      preSelectedIndex: index
+      preSelectedIndex: index,
+      preSelectedGiftId: id
     })
 
     // if (selectedGift.limitGoodsNum == 0) {
@@ -167,18 +188,18 @@ Page({
     const limitGoodsNum = this.data.limitGoodsNum
 
     // 判断是否必选商品
-    let hasMustGoods = false
+    let hasMustGoods = 0
     oriGoodsList.forEach(goods => {
       if (goods.is_must == 1) {
-        hasMustGoods = true
+        hasMustGoods++
         return
       }
     })
 
 
     let chooseLength = e.detail.value.length
-    if (hasMustGoods) {
-      chooseLength = chooseLength - 1
+    if (hasMustGoods>0) {
+      chooseLength = chooseLength - hasMustGoods
     }
 
     if (chooseLength > limitGoodsNum) {
@@ -262,20 +283,23 @@ Page({
     const goodsIdList = this.data.selectedGoodsList
     const preSelectedGift = this.data.preSelectedGift
     const preSelectedIndex = this.data.preSelectedIndex
+    const preSelectedGiftId = this.data.preSelectedGiftId
 
     // 判断是否必选商品
-    let hasMustGoods = false
+    let hasMustGoods = 0
     oriGoodsList.forEach(goods => {
       if (goods.is_must == 1) {
-        hasMustGoods = true
+        hasMustGoods++;
         return
       }
     })
 
+    console.log(hasMustGoods)
+  
     let length = goodsIdList.length
 
-    if (hasMustGoods) {
-      length = length - 1
+    if (hasMustGoods>0) {
+      length = length - hasMustGoods
     }
 
     if (limitGoodsNum > 0) {
@@ -284,7 +308,8 @@ Page({
           title: '提示',
           content: '请选择' + limitGoodsNum + '件商品',
           buttonText: '我知道了'
-        });
+        })
+        return
       } else {
         let list = []
         // 获取选择的商品
@@ -310,7 +335,8 @@ Page({
     }
 
     this.setData({
-      selectedIndex: preSelectedIndex
+      selectedIndex: preSelectedIndex,
+      selectedGiftId: preSelectedGiftId
     })
   },
 
@@ -318,6 +344,14 @@ Page({
     createOrder () {
       const selectedGift = this.data.selectedGift
       const oriGoodsList = this.data.oriSelectedList
+      if (!(this.data.userInfo.staffStatus != 2 && ((this.data.thisBirthday >= this.data.userInfo.hiredate && this.data.today >= this.data.thisBirthday) || this.data.userInfo.jobrankcode <= 4))) {
+        dd.alert({
+          title: '提示',
+          content: '暂不满足申请礼包的条件',
+          buttonText: '我知道了'
+        })
+        return
+      }
       // 判断是否选择了礼包
       if (!selectedGift.id) {
         dd.showToast({
@@ -539,7 +573,9 @@ Page({
       preSelectedGift: {},
       limitGoodsNum: 0,
       oriSelectedList: [],
-      selectedGoodsList: []
+      selectedGoodsList: [],
+      preSelectedGiftId: '',
+      selectedGiftId: ''
     })
   },
 

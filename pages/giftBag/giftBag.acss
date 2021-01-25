@@ -1,3 +1,4 @@
+@import '../../templates/empty/empty.acss';
 page{
     background: #f4f4f4;
 }

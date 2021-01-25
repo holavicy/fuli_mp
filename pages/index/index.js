@@ -184,20 +184,24 @@ Page({
     }
     get(url, data).then(res => {
       const result = res.data.list[0]
-      const userInfoNC = {
-        birthday: result.BIRTHDATE,
-        hiredate: result.HIREDATE
-      }
-      dd.setStorageSync({
-        key: 'userInfoNC',
-        data: userInfoNC
-      })
+      
 
       let user = this.data.userInfo
 
       user.birthday = result.BIRTHDATE
       user.hiredate = result.HIREDATE
       user.staffStatus = result.HIREDATE ? 1:2
+
+      const userInfoNC = {
+        birthday: result.BIRTHDATE,
+        hiredate: result.HIREDATE,
+        staffStatus: result.HIREDATE ? 1:2,
+        jobrankcode: result.JOBRANKCODE
+      }
+      dd.setStorageSync({
+        key: 'userInfoNC',
+        data: userInfoNC
+      })
 
       let year = this.data.year
 
