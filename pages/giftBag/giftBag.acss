@@ -6,13 +6,15 @@ page{
     overflow: auto;
     position: relative;
 }
-.gift-bag.none{
+.gift-bag{
     overflow: hidden;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    display: flex;
+    flex-direction: column;
 }
 .gift-bag .search-wrapper{
     height: 100rpx;
@@ -24,6 +26,8 @@ page{
     background: #ffffff;
     margin-bottom: 20rpx;
     box-sizing: border-box;
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .gift-bag .search-wrapper .search-item{
@@ -63,6 +67,9 @@ page{
 .gift-bag .gifts-wrapper{
     width: 100%;
     margin-bottom: 160rpx;
+    height: 400rpx;
+    overflow: auto;
+    flex-grow: 1;
 }
 
 .gift-bag .gifts-wrapper .gift-item-wrapper{
@@ -102,6 +109,7 @@ page{
     box-shadow: 0 4rpx 24rpx 0 rgba(0,0,0,.1);
     padding-left: 20rpx;
     box-sizing: border-box;
+    flex-shrink: 0
 }
 .bottom-sheet-wrapper{
     position: relative;

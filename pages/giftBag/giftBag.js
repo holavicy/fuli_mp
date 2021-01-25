@@ -80,8 +80,28 @@ Page({
   onShow () {
     
   },
+  onScrollToLower() {
+      // 页面被拉到底部
+    // 获取当前的page
+    let currentPage = this.data.currentPage
+    let total = this.data.total
+    let gotTotal = this.data.giftsList.length
+    // 判断是否已经获取到全部数据
 
-  onReachBottom() {
+    if (gotTotal >= total) {
+      // 若获取到全部数据，不再请求更多数据
+      console.log('已经获取到全部数据')
+    } else {
+      // 若没有获取到全部数据，page+1, 调用getGifts()
+      currentPage ++
+      this.setData({
+        currentPage: currentPage
+      })
+      this.getGifts()
+    }
+  },
+
+  onReachBottom1() {
     // 页面被拉到底部
     // 获取当前的page
     let currentPage = this.data.currentPage

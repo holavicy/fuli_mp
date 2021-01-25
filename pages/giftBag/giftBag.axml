@@ -16,7 +16,7 @@
     </view>
     <image mode="scaleToFill" src="../../images/public/search.png" onTap="search"/>
   </view>
-  <view class="gifts-wrapper">
+  <scroll-view scroll-y="true" class="gifts-wrapper" onScrollToLower="onScrollToLower">
     <view class="gift-bag-item-wrapper" a:for="{{giftsList}}">
       <view class="left">
         <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.image_url}}"  onTap="onViewImg" data-url="{{item.image_url}}"/>
@@ -31,7 +31,7 @@
       </view>
       </view>
     </view>
-  </view>
+  </scroll-view>
 
   <template is="empty" a:if="{{total == 0}}" />
   

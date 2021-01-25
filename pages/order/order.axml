@@ -10,7 +10,7 @@
   <view class="order-list">
     <view class="item" a:for="{{list}}" a:for-item="order">
       <view class="top-info">
-        <view>{{order.year}}年生日礼包（另含一张餐券）</view>
+        <view>{{order.year}}年生日礼包</view>
         <view style="color:#d81e06"> {{orderStatusDic[order.status]}}</view>
       </view>
 
