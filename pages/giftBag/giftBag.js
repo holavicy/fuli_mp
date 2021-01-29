@@ -364,7 +364,7 @@ Page({
     createOrder () {
       const selectedGift = this.data.selectedGift
       const oriGoodsList = this.data.oriSelectedList
-      if (!(this.data.userInfo.staffStatus != 2 && ((this.data.thisBirthday >= this.data.userInfo.hiredate && this.data.today >= this.data.thisBirthday) || this.data.userInfo.jobrankcode <= 4))) {
+      if (!(this.data.userInfo.staffStatus != 2 && ((this.data.thisBirthday >= this.data.userInfo.hiredate && this.data.today >= new Date(this.data.thisBirthday)) || this.data.userInfo.jobrankcode <= 4))) {
         dd.alert({
           title: '提示',
           content: '暂不满足申请礼包的条件',
