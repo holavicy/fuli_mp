@@ -80,7 +80,7 @@
           <view class="left">
             <checkbox value="{{item.id}}" checked="{{item.checked || item.is_must == 1}}" disabled="{{item.num <= 0 || item.is_must == 1}}" />
             <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}" onTap="onViewImg" data-url="{{item.imageUrl}}"/>
-            <text class="checkbox-text">{{item.name}}</text>
+            <text class="checkbox-text">{{item.name}}（{{item.num>0?item.num+item.unit:'暂无库存'}}）</text>
           </view>
           <view class="right">
             <image a:if="{{item.num <= 0 && item.totalLikeNum == 0}}" class="heart" mode="scaleToFill" src="../../images/public/heart.png" data-id="{{item.id}}" data-index="{{index}}" onTap="want"/>
@@ -92,7 +92,7 @@
         <view a:for="{{oriSelectedList}}" class="goods-item-wrapper">
           <view class="left">
             <image class="goods-image" mode="scaleToFill" src="{{DOMAIN_FILE+item.imageUrl}}" onTap="onViewImg" data-url="{{item.imageUrl}}"/>
-            <text>{{item.name}}</text>
+            <text>{{item.name}}（{{item.num>0?item.num+item.unit:'暂无库存'}}）</text>
           </view>
           <view class="right">
             <image a:if="{{item.num <= 0 && item.totalLikeNum == 0}}" class="heart" mode="scaleToFill" src="../../images/public/heart.png" data-id="{{item.id}}" data-index="{{index}}" onTap="want"/>
