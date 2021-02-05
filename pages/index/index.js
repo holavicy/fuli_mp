@@ -1,4 +1,5 @@
 import { get, post } from '../request.js';
+import { get7DaysBefore } from '../utils/common.js'
 
 Page({
   data:{
@@ -167,6 +168,7 @@ Page({
           })
 
           this.getUserInfoNC(r.jobnumber)
+          // this.getUserInfoNC(110445)
           this.getOrder()
           this.getSupplyList()
         })
@@ -206,9 +208,17 @@ Page({
       let year = this.data.year
 
       let thisBirthday = result.BIRTHDATE.replace(/^[0-9]{4}/g,year)
+      console.log(typeof(thisBirthday))
+
+      // 可提前一个礼拜领取
+
+      var sdtime3=get7DaysBefore(thisBirthday)
+      console.log(sdtime3)
+      console.log(typeof(sdtime3))
+
 
       this.setData({
-        thisBirthday: thisBirthday,
+        thisBirthday: sdtime3,
         userInfo: user
       })
       this.isZBirthday()

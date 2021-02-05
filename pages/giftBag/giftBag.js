@@ -1,4 +1,5 @@
 import { get, post, DOMAIN_FILE } from '../request.js';
+import { get7DaysBefore } from '../utils/common.js'
 
 Page({
   data: {
@@ -69,9 +70,10 @@ Page({
 
         let year = today.getFullYear()
         let thisBirthday = res.data.birthday.replace(/^[0-9]{4}/g,year)
+         var sdtime3=get7DaysBefore(thisBirthday)
 
         this.setData({
-          thisBirthday: thisBirthday,
+          thisBirthday: sdtime3,
           userInfo: res.data
         })
       }
