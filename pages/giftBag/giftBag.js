@@ -284,6 +284,7 @@ Page({
 
         const name = supplyStaff.staff_name
         const staffNo = supplyStaff.staff_no
+        this.getUserInfoNC(staffNo)
           this.setData({
             name: name,
             staffNo: staffNo
@@ -615,4 +616,56 @@ Page({
       showImg: false
     })
   },
+
+  // 从NC中获取员工信息
+  getUserInfoNC (code) {
+    const url = '/getUserInfoNC'
+    const data = {
+      code: code
+    }
+    get(url, data).then(res => {
+      const result = res.data.list[0]
+      
+
+      let user = this.data.userInfo
+
+      user.birthday = result.BIRTHDATE
+      user.hiredate = result.HIREDATE
+      user.staffStatus = result.HIREDATE ? 1:2
+
+      const userInfoNC = {
+        birthday: result.BIRTHDATE,
+        hiredate: result.HIREDATE,
+        staffStatus: result.HIREDATE ? 1:2,
+        jobrankcode: result.JOBRANKCODE
+      }
+
+      let year = this.data.year
+
+      let thisBirthday = result.BIRTHDATE.replace(/^[0-9]{4}/g,year)
+      console.log(typeof(thisBirthday))
+
+      // 可提前一个礼拜领取
+
+      var sdtime3=get7DaysBefore(thisBirthday)
+      console.log(sdtime3)
+      console.log(typeof(sdtime3))
+
+
+      this.setData({
+        thisBirthday: sdtime3,
+        userInfo: user
+      })
+      this.isZBirthday()
+    })
+  },
+
+  // 判断是否是整生日
+  isZBirthday () {
+    const oriYear = /^[0-9]{4}/g.exec(this.data.userInfo.birthday)[0]
+    const isZBirthday = (Number(this.data.year) - Number(oriYear) + 1) % 10 === 0 ? true : false
+    this.setData({
+      isZBirthday: isZBirthday
+    })
+  }
 });
