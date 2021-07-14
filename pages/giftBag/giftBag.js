@@ -30,7 +30,8 @@ Page({
     selectedGoodsList: [],
     preSelectedGiftId: '',
     thisBirthday: '',
-    userInfo: null
+    userInfo: null,
+    isZBirthday: false
   },
   onLoad() {
     this.setData({
@@ -76,6 +77,7 @@ Page({
           thisBirthday: sdtime3,
           userInfo: res.data
         })
+        this.isZBirthday()
       }
     })
   },
@@ -367,6 +369,14 @@ Page({
     createOrder () {
       const selectedGift = this.data.selectedGift
       const oriGoodsList = this.data.oriSelectedList
+      if (this.data.isZBirthday) {
+        dd.alert({
+          title: '提示',
+          content: '整生日请到OA系统中申请',
+          buttonText: '我知道了'
+        })
+        return
+      }
       if (!(this.data.userInfo.staffStatus != 2 && ((this.data.thisBirthday >= this.data.userInfo.hiredate && this.data.today >= new Date(this.data.thisBirthday)) || this.data.userInfo.jobrankcode <= 4))) {
         dd.alert({
           title: '提示',
@@ -664,6 +674,9 @@ Page({
   isZBirthday () {
     const oriYear = /^[0-9]{4}/g.exec(this.data.userInfo.birthday)[0]
     const isZBirthday = (Number(this.data.year) - Number(oriYear) + 1) % 10 === 0 ? true : false
+    console.log(oriYear)
+    console.log(this.data.year)
+    console.log(isZBirthday)
     this.setData({
       isZBirthday: isZBirthday
     })
