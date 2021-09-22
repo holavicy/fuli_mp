@@ -276,8 +276,20 @@ Page({
     dd.showActionSheet({
       title: '选择人员',
       items: this.data.actionSheet,
-      cancelButtonText: '取消',
+      cancelButtonText: '取消代他人申请',
       success: (res) => {
+        console.log(res)
+        const index = res.index
+        if (index == -1) {
+          console.log(this.data.creator)
+          this.getUserInfoNC(this.data.creator)
+          this.setData({
+            name: this.data.creatorName,
+            staffNo: this.data.creator
+          })
+          return
+        }
+        console.log('1212121212121')
         let supplyStaffList = this.data.supplyStaffList 
         // const btn = res.index === -1 ? '取消' : '第' + res.index + '个';
         console.log(supplyStaffList[res.index])
@@ -377,6 +389,8 @@ Page({
         })
         return
       }
+      console.log(this.data.userInfo)
+      console.log(!(this.data.userInfo.staffStatus != 2 && ((this.data.thisBirthday >= this.data.userInfo.hiredate && this.data.today >= new Date(this.data.thisBirthday)) || this.data.userInfo.jobrankcode <= 4)))
       if (!(this.data.userInfo.staffStatus != 2 && ((this.data.thisBirthday >= this.data.userInfo.hiredate && this.data.today >= new Date(this.data.thisBirthday)) || this.data.userInfo.jobrankcode <= 4))) {
         dd.alert({
           title: '提示',
@@ -642,6 +656,7 @@ Page({
       user.birthday = result.BIRTHDATE
       user.hiredate = result.HIREDATE
       user.staffStatus = result.HIREDATE ? 1:2
+      user.jobrankcode = result.JOBRANKCODE
 
       const userInfoNC = {
         birthday: result.BIRTHDATE,
