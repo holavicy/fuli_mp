@@ -1,4 +1,5 @@
 <view class="index">
+  <!-- 当前登录人的信息（NC数据库） -->
   <view class="user-info-bg"></view>
   <view class="user-info-wrapper">
     <view class="left">
@@ -13,6 +14,15 @@
     </view>
   </view>
 
+  <!-- 当前登录人今年的生日礼包领取状态，分为一下五种：
+  所有人的整生日礼包在OA领取，
+  NC中jobrankcode<=4当年的生日礼包随时可以领取，
+  非正式员工无法领取，
+  转正日期大于今年的生日无法领取， 
+  生日7天以前无法领取，
+  申请之后待管理员确认， 
+  管理员确认后待领取， 
+  领取之后已完成-->
   <view class="gift-info">
     <view a:if="{{userInfo.staffStatus == 2}}" class="error-info-wrapper">
       <image class="error-tip" mode="scaleToFill" src="../../images/public/tip.png"/>
@@ -68,6 +78,7 @@
     </view>
   </view>
 
+  <!-- 代他人领取列表：当年有代他人领取，才显示，否则不显示 -->
   <view class="supply-wrapper" a:if="{{supplyList.length>0}}">
     <view class="supply-title">
     <image class="icon" mode="scaleToFill" src="../../images/public/light.png"/>
@@ -91,6 +102,7 @@
     </view>
   </view>
 
+  <!-- 问卷调查 -->
   <view class="suggest-wrapper" a:if="{{canSuggest}}">
     <view class="suggest-title">
       <view class="weight">

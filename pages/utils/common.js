@@ -18,3 +18,8 @@ function formatNumber(n) {
         return String(number)
     }
 }
+
+export function isZBirthday(birthYear, year) {
+    const isZBirthday = (Number(year) - Number(birthYear) + 1) % 10 === 0 ? true : false
+    return isZBirthday
+}

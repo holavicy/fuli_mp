@@ -145,8 +145,8 @@ Page({
         }
         const url = '/getUserInfo'
         get(url, data).then((r) => {
-          console.log(r)
-          // r.jobnumber = 100055
+          // console.log(r)
+          // r.jobnumber = 110227
           const userInfo = {
             name: r.name,
             staffNo: r.jobnumber,
